@@ -62,22 +62,6 @@ $(function () {
     }
   });
 
-
-  // Progress Bar
-  win.on('scroll', function () {
-    $('.skill-progress span').each(function () {
-      var bottom_of_object = $(this).offset().top + $(this).outerHeight(),
-          bottom_of_window = $(window).scrollTop() + $(window).height(),
-          myVal = $(this).attr('data-value');
-      if (bottom_of_window > bottom_of_object) {
-        $(this).css({
-          width : myVal
-        });
-      }
-    });
-  });
-
-
   // CounterUp
   $('.counter .number').counterUp({
     delay: 10,
@@ -128,35 +112,6 @@ $(window).on('load', function () {
   // Add Active Class To Filter Button
   $('.filtering').on('click', 'span', function () {
     $(this).addClass('active').siblings().removeClass('active');
-  });
-
-
-  // Contact Form Validation
-  $('#contact-form').validator();
-
-  $('#contact-form').on('submit', function (e) {
-
-    if (!e.isDefaultPrevented()) {
-      var url = "contact.php";
-
-      $.ajax({
-        type: "POST",
-        url: url,
-        data: $(this).serialize(),
-        success: function (data) {
-
-          var messageAlert = 'alert-' + data.type,
-              messageText = data.message,
-              alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-
-          if (messageAlert && messageText) {
-            $('#contact-form').find('.messages').html(alertBox);
-            $('#contact-form')[0].reset();
-          }
-        }
-      });
-      return false;
-    }
   });
 
 });
